@@ -9,6 +9,7 @@ type Props ={
   subject:string,
   footer:string,
   onReset:() => void
+  disabled:boolean
 }
 
 const MoodOutput = ( {subject, footer, onReset }:Props ) => {

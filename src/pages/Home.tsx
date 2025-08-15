@@ -64,8 +64,15 @@ const Home = () => {
 
       {/* input ku thevayana state ah props la pass pandrom for both moodInput and moodoutput.. */}
       {/* input ku thevayanthu , mood state to store mood , setmood function to update state and  generate state*/}
-      <MoodeInput mood={mood} setMood={setMood} onGenerate={handleGenerate} isDisabled={generated} />
-      <MoodeOutput subject={subject} footer={footer} onReset={handleReset} disabled = {generated}/>
+
+      {/* submit nadakka pothuna moode input will display else moodeoutput */}
+
+      {
+        !generated ? (  <MoodeInput mood={mood} setMood={setMood} onGenerate={handleGenerate} isDisabled={generated} /> )
+        : ( <MoodeOutput subject={subject} footer={footer} onReset={handleReset} disabled = {generated}/> )
+      }
+     
+      
     </div>
   )
 }

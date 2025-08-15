@@ -8,6 +8,7 @@ type Props ={
   mood:string,
   setMood:(val:string) => void,
   onGenerate:() => void
+  isDisabled:boolean
 }
 
 const MoodeInput = ( {mood, setMood , onGenerate, isDisabled }:Props ) => { // destructuring from props
