@@ -17,7 +17,45 @@ const Home = () => {
   const [footer, setFooter] = useState("");
 
   
+  // customised moods: for avoid multiple else-if conditions , because of using typescript we have to mention , its type..
+  // multiple objects : ku Record<string, this statement, single object na is enough :{ subject: string; footer: string }
+  const customisedMoods: Record<string, { subject: string; footer: string }> = {
 
+    happy: {
+      subject: "Feeling happy",
+      footer: "Always be happy..",
+    },
+
+    motivated: {
+      subject: "🚀 Time to Chase Your Dreams",
+      footer: "Stay focused, stay strong — success is near."
+    },
+
+    sad: {
+      subject: "Feeling sad",
+      footer: "Sending hugs..",
+    },
+    calm: {
+      subject: "🌿 Peaceful Moments Ahead",
+      footer: "Take a deep breath. Relax. Everything’s under control."
+    },
+
+    angry: {
+      subject: "Feeling tough today",
+      footer: "Just chill..",
+    },
+
+    excited: {
+      subject: "Feeling excited",
+      footer: "Keep the energy high!",
+    },
+
+    lonely: {
+      subject: "Feeling lonely",
+      footer: "You are not alone ❤️",
+    }
+
+  }
 
 
   // handle generate
@@ -30,26 +68,31 @@ const Home = () => {
       return; // stop further execution
     }
 
-    if (lowermood.includes("happy")) {
-      setSubject("Feeling happy");
-      setFooter("Always be happy..");
-    } else if (lowermood.includes("sad")) {
-      setSubject("Feeling sad");
-      setFooter("Send hugs..");
-    } else if (lowermood.includes("angry")) {
-      setSubject("Feeling tough today");
-      setFooter("Just chill..");
-    }
+    // const selectedMood = Object.keys(customisedMoods); 
+    // console.log(selectedMood) // weill get all the keys as array : (5) ['happy', 'sad', 'angry', 'excited', 'lonely']
+    // got as array : so i can use "find" method , so condition based on that..
 
-    if (
-      lowermood !== "happy" &&
-      lowermood !== "sad" &&
-      lowermood !== "angry"
-    ) {
-      setSubject("update mood");
-      setFooter("Dont wrorry , be happy");
+    const selectedMood = Object.keys(customisedMoods).find(m => lowermood.includes(m)); // keys use panni find pandrom.
+
+    
+     // lowermood : mood state la get pannatha lowercase ku convert panna variable.
+    
+      // selected mood variable la , keys use panni find panna array of keys as string ah kedaikum, so used includes method ,
+
+    if(selectedMood){ // if keys match achuna.. , match ana key oda values as object ah irukku so , dot use panni display pandrom..
+      setSubject(customisedMoods[selectedMood].subject); // why dot subject na : will get that key , the value is object so we can get like that.
+      setFooter(customisedMoods[selectedMood].footer);
+    }else{
+      setSubject("Oops! 🤔");
+      setFooter( "Something didn’t match. Let’s check again.");
     }
-    // generate true
+    
+    // FINAL NOTE  : BY CUSTOMISE MOODS AS OBJECT
+    // 1.object keys ah get pandren in a variable selectedMood, will get each keys as string of arrray,
+    // 2.Array : nala  so can use find method use panni input la type pannnatha irukka keys uhm math aguratha find pandrom.., match agiduchuna atha ennoda selectedMood,
+    // 3.so selected mood iruntha atha display pandrom,  main object la find panna key vachu athoda value ah get panni update pandrom..
+    // 4 . thats it..
+
     setGenerated(true); // while submit generate is true..
     setMood("");
   }

@@ -14,18 +14,38 @@ type Props ={
 
 const MoodOutput = ( {subject, footer, onReset }:Props ) => {
 
+  const today = new Date();
+  const dateString = today.toISOString().split("T")[0];
+
+  // handle copy to clipboard.
+   const handleCopy = (text: string) => { // getting a text as string..
+    navigator.clipboard // navigator : built in object in browser environment, clipboard : allows you to read from or write , used for copy and paste.
+      .writeText(text) // writeText() : is a method that copies text to the clipboard, writeText returns a Promise (something that happens asynchronously).
+      .then(() => alert("Copied to clipboard!"))
+      .catch(() => alert("Failed to copy"));
+  };
+
   return (
     <div className="space-y-4">
       {/* to display , mail related to mood */}
       <div>
         <label className="">Subject:</label>
-        <Input value={subject} readOnly />
+        <div className="flex  gap-3">
+          <Input value={`${subject} - Date : ${dateString}`} readOnly  />
+          <Button onClick={() => handleCopy(subject)}>Copy subject</Button>
+          
+        </div>
+       
       </div>
+      
 
       {/* content realted to mood */}
       <div>
         <label className="block">Footer Signature:</label>
-        <Textarea value={footer} readOnly />
+        <div className="flex  gap-3">
+          <Textarea value={footer} readOnly />
+          <Button onClick={() => handleCopy(footer)}>Copy footer</Button>
+        </div>
       </div>
 
       {/* button for reset */}
