@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 
 type Props ={
   mood:string,
-  setMood:(val:string) => void,
+  setMood:(val:string) => void, // setmood function la get pandrathu string..
   onGenerate:() => void
   isDisabled:boolean
 }

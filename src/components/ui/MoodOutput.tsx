@@ -13,16 +13,18 @@ type Props ={
 }
 
 const MoodOutput = ( {subject, footer, onReset }:Props ) => {
+
   return (
     <div className="space-y-4">
       {/* to display , mail related to mood */}
       <div>
-        <label className="block">Subject:</label>
+        <label className="">Subject:</label>
         <Input value={subject} readOnly />
       </div>
 
       {/* content realted to mood */}
-      <div><label className="block">Footer Signature:</label>
+      <div>
+        <label className="block">Footer Signature:</label>
         <Textarea value={footer} readOnly />
       </div>
 

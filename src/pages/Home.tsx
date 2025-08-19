@@ -7,16 +7,23 @@ import { useState } from "react"
 
 
 const Home = () => {
-  // states for app
+  // states for app:
+
+  // mood input states:
   const [mood, setMood] = useState("");
+  const [generated, setGenerated] = useState(false);
+  // mood output states : to display output
   const [subject, setSubject] = useState("");
   const [footer, setFooter] = useState("");
-  const [generated, setGenerated] = useState(false);
+
+  
+
+
 
   // handle generate
   const handleGenerate = () => {
 
-    const lowermood = mood.toLowerCase();
+    const lowermood = mood.toLowerCase(); // converting the mood state to lower case..
 
     if (lowermood === "") {
       alert("please fill the field");
@@ -43,18 +50,18 @@ const Home = () => {
       setFooter("Dont wrorry , be happy");
     }
     // generate true
-    setGenerated(true);
+    setGenerated(true); // while submit generate is true..
     setMood("");
   }
 
   // handle reset
-  const handleReset = () =>{
+  const handleReset = () => {
 
     setSubject("");
     setFooter("");
     // after reset generated , turn false
     setGenerated(false);
-  } 
+  }
 
   return (
     <div className="max-w-lg mx-auto mt-20 p-6 rounded-lg space-y-4  shadow-sm bg-white">
@@ -67,12 +74,12 @@ const Home = () => {
 
       {/* submit nadakka pothuna moode input will display else moodeoutput */}
 
-      {
-        !generated ? (  <MoodeInput mood={mood} setMood={setMood} onGenerate={handleGenerate} isDisabled={generated} /> )
-        : ( <MoodeOutput subject={subject} footer={footer} onReset={handleReset} disabled = {generated}/> )
+      { // genearate aguthu na handle submit nadakkanum..
+        !generated ? (<MoodeInput mood={mood} setMood={setMood} onGenerate={handleGenerate} isDisabled={generated} />)
+          : (<MoodeOutput subject={subject} footer={footer} onReset={handleReset} disabled={generated} />)
       }
-     
-      
+
+
     </div>
   )
 }
